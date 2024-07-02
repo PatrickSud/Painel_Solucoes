@@ -1,13 +1,128 @@
-// Função para mostrar a seção de conteúdo correspondente ao botão clicado
-function showContent(sectionId) {
-    // Seleciona todas as seções de conteúdo
-    const sections = document.querySelectorAll('.content-section');
-    
-    // Itera sobre cada seção e remove a classe 'active'
-    sections.forEach(section => {
-        section.classList.remove('active');
+function openModal() {
+    // Load current status data into modal fields
+    const statusData = loadStatusData();
+    statusData.forEach(system => {
+        document.getElementById(`${system.id}-datetime-input`).value = system.datetime;
+        document.getElementById(`${system.id}-description-input`).value = system.description;
+        document.getElementById(`${system.id}-status-input`).value = system.status;
     });
 
-    // Adiciona a classe 'active' à seção correspondente ao botão clicado
-    document.getElementById(sectionId).classList.add('active');
+    document.getElementById('update-modal').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('update-modal').style.display = 'none';
+}
+
+function updateStatus() {
+    const statusData = [
+        {
+            id: 'onvio',
+            datetime: document.getElementById('onvio-datetime-input').value,
+            description: document.getElementById('onvio-description-input').value,
+            status: document.getElementById('onvio-status-input').value
+        },
+        {
+            id: 'dominio',
+            datetime: document.getElementById('dominio-datetime-input').value,
+            description: document.getElementById('dominio-description-input').value,
+            status: document.getElementById('dominio-status-input').value
+        },
+        {
+            id: 'api',
+            datetime: document.getElementById('api-datetime-input').value,
+            description: document.getElementById('api-description-input').value,
+            status: document.getElementById('api-status-input').value
+        },
+        {
+            id: 'esocial',
+            datetime: document.getElementById('esocial-datetime-input').value,
+            description: document.getElementById('esocial-description-input').value,
+            status: document.getElementById('esocial-status-input').value
+        },
+        {
+            id: 'error',
+            datetime: document.getElementById('error-datetime-input').value,
+            description: document.getElementById('error-description-input').value,
+            status: document.getElementById('error-status-input').value
+        }
+    ];
+
+    // Validate input data
+    const isValid = validateStatusData(statusData);
+    if (!isValid) {
+        alert('Por favor, insira todos os campos corretamente.');
+        return;
+    }
+
+    // Update the table with new data and save to local storage
+    statusData.forEach(system => {
+        document.getElementById(`${system.id}-datetime`).innerText = system.datetime.replace('T', ' ');
+        document.getElementById(`${system.id}-description`).innerText = system.description;
+
+        const statusElement = document.getElementById(`${system.id}-status`);
+        statusElement.className = '';  // Remove existing status class
+        statusElement.classList.add(`status-${system.status}`);
+    });
+
+    saveStatusData(statusData);
+    closeModal();
+}
+
+function loadStatus() {
+    const statusData = loadStatusData();
+    statusData.forEach(system => {
+        document.getElementById(`${system.id}-datetime`).innerText = system.datetime.replace('T', ' ');
+        document.getElementById(`${system.id}-description`).innerText = system.description;
+
+        const statusElement = document.getElementById(`${system.id}-status`);
+        statusElement.className = '';  // Remove existing status class
+        statusElement.classList.add(`status-${system.status}`);
+    });
+}
+
+function validateStatusData(statusData) {
+    return statusData.every(system => system.datetime && system.description && system.status);
+}
+
+function loadStatusData() {
+    const defaultStatusData = [
+        {
+            id: 'onvio',
+            datetime: '2024-05-15T14:45',
+            description: 'Ambiente de produção normalizado',
+            status: 'green'
+        },
+        {
+            id: 'dominio',
+            datetime: '2024-05-15T13:20',
+            description: 'Indisponibilidade momentânea no Portal WEB devido a problemas de infraestrutura. Web Service segue funcionando',
+            status: 'red'
+        },
+        {
+            id: 'api',
+            datetime: '2024-04-12T16:30',
+            description: 'Ambiente de produção normalizado',
+            status: 'green'
+        },
+        {
+            id: 'esocial',
+            datetime: '2024-04-10T09:00',
+            description: 'Instabilidade na infraestrutura, com impactos no processamento de eventos',
+            status: 'yellow'
+        },
+        {
+            id: 'error',
+            datetime: '2024-01-18T15:00',
+            description: 'Instabilidade na infraestrutura, com impactos no processamento de eventos',
+            status: 'yellow'
+        }
+    ];
+
+    const storedStatusData = localStorage.getItem('statusData');
+    return storedStatusData ? JSON.parse(storedStatusData) : defaultStatusData;
+}
+
+function saveStatusData(statusData) {
+    localStorage.setItem('statusData', JSON.stringify(statusData));
 }
