@@ -1,267 +1,90 @@
-:root {
-    --background-color: #121212;
-    --text-color: #e0e0e0;
-    --menu-background-color: #1e1e1e;
-    --button-background-color: #0056b3;
-    --button-hover-background-color: #004494;
-    --info-background-color: #2e2e2e;
-    --highlight-color: #e88b22;
-    --green-color: #4CAF50;
-    --yellow-color: #FFEB3B;
-    --red-color: #F44336;
-}
-
+/* Estilo para o corpo da página */
 body {
     font-family: Arial, sans-serif;
-    background-color: var(--background-color);
-    color: var(--text-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: #f4f4f4;
     margin: 0;
-    gap: 40px;
-}
-
-.menu {
-    background-color: var(--menu-background-color);
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    text-align: center;
-}
-
-.menu h1 {
-    margin-bottom: 30px;
-    font-size: 28px;
-    line-height: 1.2;
-    color: var(--text-color);
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    position: relative;
-}
-
-.menu h1::after {
-    content: "";
-    display: block;
-    width: 60%;
-    height: 2px;
-    background-color: var(--highlight-color);
-    margin: 10px auto 0;
-}
-
-.menu ul {
-    list-style: none;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.menu li {
-    margin: 15px 0;
-}
-
-.menu a {
-    display: block;
-    padding: 15px;
-    background-color: var(--button-background-color);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    font-size: 18px;
-}
-
-.menu a:hover {
-    background-color: var(--button-hover-background-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.menu a:active {
-    background-color: #003366;
-}
-
-.info-section {
-    background-color: var(--info-background-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    width: 80%;
-    max-width: 600px;
-    text-align: center;
-    margin-top: 40px;
-}
-
-.info-section h2 {
-    color: var(--highlight-color);
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.info-section p {
-    color: var(--text-color);
-    font-size: 16px;
-}
-
-.status-section {
-    background-color: var(--info-background-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    width: 90%;
-    max-width: 800px;
-    text-align: center;
-    animation: fadeIn 1s ease-in-out;
-}
-
-.status-section h2 {
-    color: var(--highlight-color);
-    margin-bottom: 10px;
-    font-size: 20px;
-}
-
-.status-section table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.status-section th, .status-section td {
-    border: 1px solid #444;
-    padding: 10px;
-    text-align: center;
-}
-
-.status-section th {
-    background-color: var(--menu-background-color);
-}
-
-.status-green, .status-yellow, .status-red {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0 auto;
-}
-
-.status-green {
-    background-color: var(--green-color);
-}
-
-.status-yellow {
-    background-color: var(--yellow-color);
-    color: #000;
-}
-
-.status-red {
-    background-color: var(--red-color);
-}
-
-@media (max-width: 600px) {
-    .menu {
-        padding: 20px;
-    }
-
-    .menu h1 {
-        font-size: 22px;
-    }
-
-    .menu a {
-        font-size: 16px;
-        padding: 10px;
-    }
-
-    .info-section, .status-section {
-        width: 90%;
-    }
-
-    .status-section table, .status-section th, .status-section td {
-        font-size: 14px;
-    }
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Modal styling */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-    background-color: var(--background-color);
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 10px;
-}
-
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-content h3 {
-    margin-top: 0;
-}
-
-.modal-content input, .modal-content select {
-    width: calc(100% - 22px);
-    padding: 10px;
-    margin: 5px 0 20px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-}
-
-.modal-content input[type=datetime-local], .modal-content select {
-    width: auto;
-}
-
-.modal-content input[type=text]:focus, .modal-content select:focus, .modal-content input[type=datetime-local]:focus {
-    background-color: #ddd;
-    outline: none;
-}
-
-.modal-content button {
-    background-color: var(--button-background-color);
+/* Estilo para o cabeçalho */
+header {
+    background-color: #4CAF50;
     color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
+    padding: 1em;
+    text-align: center;
+}
+
+/* Estilo para o conteúdo principal */
+main {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2em;
+}
+
+/* Estilo para o menu */
+#menu {
+    flex: 1;
+    margin-right: 2em;
+}
+
+/* Estilo para a seção de conteúdo */
+#content {
+    flex: 2;
+}
+
+/* Estilo para os botões do menu */
+button {
+    display: block;
+    margin: 1em 0;
+    padding: 0.5em;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
     border: none;
     cursor: pointer;
-    width: 100%;
-    border-radius: 10px;
 }
 
-.modal-content button:hover {
-    background-color: var(--button-hover-background-color);
+button:hover {
+    background-color: #45a049;
 }
 
-.system-update {
-    margin-bottom: 20px;
+/* Estilo para as seções de conteúdo */
+.content-section {
+    display: none;
+}
+
+/* Estilo para a seção de conteúdo ativa */
+.content-section.active {
+    display: block;
+}
+
+/* Estilo para a lista de status do sistema */
+.system-status {
+    margin-top: 1em;
+}
+
+/* Estilo para cada item de status */
+.status-item {
+    margin-bottom: 1em;
+}
+
+/* Estilo para a linha horizontal */
+hr {
+    border: 1px solid #ddd;
+}
+
+/* Estilo para o status, data/hora e descrição */
+.status, .timestamp, .description {
+    color: #333;
+    background-color: #d3d3d3;
+    padding: 0.2em 0.5em;
+    border-radius: 4px;
+}
+
+/* Estilo responsivo para telas menores */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
 }
