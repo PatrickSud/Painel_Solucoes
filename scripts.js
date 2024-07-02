@@ -1,5 +1,4 @@
 function openModal() {
-    // Load current status data into modal fields
     const statusData = loadStatusData();
     statusData.forEach(system => {
         document.getElementById(`${system.id}-datetime-input`).value = system.datetime;
@@ -48,20 +47,18 @@ function updateStatus() {
         }
     ];
 
-    // Validate input data
     const isValid = validateStatusData(statusData);
     if (!isValid) {
         alert('Por favor, insira todos os campos corretamente.');
         return;
     }
 
-    // Update the table with new data and save to local storage
     statusData.forEach(system => {
         document.getElementById(`${system.id}-datetime`).innerText = system.datetime.replace('T', ' ');
         document.getElementById(`${system.id}-description`).innerText = system.description;
 
         const statusElement = document.getElementById(`${system.id}-status`);
-        statusElement.className = '';  // Remove existing status class
+        statusElement.className = 'status';
         statusElement.classList.add(`status-${system.status}`);
     });
 
@@ -76,7 +73,7 @@ function loadStatus() {
         document.getElementById(`${system.id}-description`).innerText = system.description;
 
         const statusElement = document.getElementById(`${system.id}-status`);
-        statusElement.className = '';  // Remove existing status class
+        statusElement.className = 'status';
         statusElement.classList.add(`status-${system.status}`);
     });
 }
