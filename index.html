@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Soluções Domínio</title>
+    <meta name="description" content="Painel de Soluções Domínio - Acesso remoto, atualizações, instalação e central de soluções para gerenciamento de domínios.">
+    <meta name="keywords" content="painel de soluções, domínio, acesso remoto, atualizações, instalação, central de soluções">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body onload="loadStatus()">
+    <div class="info-section">
+        <h2>Informações Importantes</h2>
+        <p>Atualmente, o acesso ao Domínio Web não está disponível devido a problemas de autenticação. Nossa equipe está trabalhando para resolver o problema o mais rápido possível. Pedimos desculpas pelo transtorno.</p>
+    </div>
+
+    <div class="menu">
+        <h1>Painel de Soluções Domínio</h1>
+        <ul aria-label="Menu de Navegação">
+            <li><a href="#acesso-remoto" class="btn-blue" aria-label="Acesso Remoto"><i class="fas fa-desktop"></i> Acesso Remoto</a></li>
+            <li><a href="#atualizacoes" class="btn-blue" aria-label="Atualizações"><i class="fas fa-sync"></i> Atualizações</a></li>
+            <li><a href="#instalacao" class="btn-blue" aria-label="Instalação"><i class="fas fa-wrench"></i> Instalação</a></li>
+            <li><a href="#central-de-solucoes" class="btn-blue" aria-label="Central de Soluções"><i class="fas fa-life-ring"></i> Central de Soluções</a></li>
+            <li><a href="#informacoes-contato" class="btn-blue" aria-label="Informações de Contato"><i class="fas fa-info-circle"></i> Informações de Contato</a></li>
+        </ul>
+    </div>
+
+    <div class="status-section">
+        <h2>Status dos Sistemas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sistema</th>
+                    <th>Data e Hora</th>
+                    <th>Descrição</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="status-tbody">
+                <tr>
+                    <td>Onvio</td>
+                    <td id="onvio-datetime">15/05/2024, 14h45</td>
+                    <td id="onvio-description">Ambiente de produção normalizado</td>
+                    <td class="status-green" id="onvio-status"></td>
+                </tr>
+                <tr>
+                    <td>Dominio Web</td>
+                    <td id="dominio-datetime">15/05/2024, 13h20</td>
+                    <td id="dominio-description">Indisponibilidade momentânea no Portal WEB devido a problemas de infraestrutura. Web Service segue funcionando</td>
+                    <td class="status-red" id="dominio-status"></td>
+                </tr>
+                <tr>
+                    <td>Integração API's</td>
+                    <td id="api-datetime">12/04/2024, 16h30</td>
+                    <td id="api-description">Ambiente de produção normalizado</td>
+                    <td class="status-green" id="api-status"></td>
+                </tr>
+                <tr>
+                    <td>Comunicação eSocial</td>
+                    <td id="esocial-datetime">10/04/2024, 9h00</td>
+                    <td id="esocial-description">Instabilidade na infraestrutura, com impactos no processamento de eventos</td>
+                    <td class="status-yellow" id="esocial-status"></td>
+                </tr>
+                <tr>
+                    <td>Notificação de Erro no Sistema</td>
+                    <td id="error-datetime">18/01/2024, 15h00</td>
+                    <td id="error-description">Instabilidade na infraestrutura, com impactos no processamento de eventos</td>
+                    <td class="status-yellow" id="error-status"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button onclick="openModal()">Atualizar Status</button>
+    </div>
+
+    <div id="update-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Atualizar Status dos Sistemas</h2>
+            <form id="update-form">
+                <div class="system-update">
+                    <h3>Onvio:</h3>
+                    <label for="onvio-datetime-input">Data e Hora:</label>
+                    <input type="datetime-local" id="onvio-datetime-input">
+                    <label for="onvio-description-input">Descrição:</label>
+                    <input type="text" id="onvio-description-input">
+                    <label for="onvio-status-input">Status:</label>
+                    <select id="onvio-status-input">
+                        <option value="green">Verde</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="red">Vermelho</option>
+                    </select>
+                </div>
+                <div class="system-update">
+                    <h3>Dominio Web:</h3>
+                    <label for="dominio-datetime-input">Data e Hora:</label>
+                    <input type="datetime-local" id="dominio-datetime-input">
+                    <label for="dominio-description-input">Descrição:</label>
+                    <input type="text" id="dominio-description-input">
+                    <label for="dominio-status-input">Status:</label>
+                    <select id="dominio-status-input">
+                        <option value="green">Verde</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="red">Vermelho</option>
+                    </select>
+                </div>
+                <div class="system-update">
+                    <h3>Integração API's:</h3>
+                    <label for="api-datetime-input">Data e Hora:</label>
+                    <input type="datetime-local" id="api-datetime-input">
+                    <label for="api-description-input">Descrição:</label>
+                    <input type="text" id="api-description-input">
+                    <label for="api-status-input">Status:</label>
+                    <select id="api-status-input">
+                        <option value="green">Verde</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="red">Vermelho</option>
+                    </select>
+                </div>
+                <div class="system-update">
+                    <h3>Comunicação eSocial:</h3>
+                    <label for="esocial-datetime-input">Data e Hora:</label>
+                    <input type="datetime-local" id="esocial-datetime-input">
+                    <label for="esocial-description-input">Descrição:</label>
+                    <input type="text" id="esocial-description-input">
+                    <label for="esocial-status-input">Status:</label>
+                    <select id="esocial-status-input">
+                        <option value="green">Verde</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="red">Vermelho</option>
+                    </select>
+                </div>
+                <div class="system-update">
+                    <h3>Notificação de Erro no Sistema:</h3>
+                    <label for="error-datetime-input">Data e Hora:</label>
+                    <input type="datetime-local" id="error-datetime-input">
+                    <label for="error-description-input">Descrição:</label>
+                    <input type="text" id="error-description-input">
+                    <label for="error-status-input">Status:</label>
+                    <select id="error-status-input">
+                        <option value="green">Verde</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="red">Vermelho</option>
+                    </select>
+                </div>
+                <button type="button" onclick="updateStatus()">Salvar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
