@@ -79,6 +79,13 @@
             <h2 class="modal-title">Atualizar Status dos Sistemas</h2>
             <form id="update-form">
                 <div class="system-update">
+                <label for="important-info-input">Informação importante? (Será exibida no topo da página inicial)</label>
+                <select id="important-info-input">
+                    <option value="no">Não</option>
+                    <option value="yes">Sim</option>
+                </select>
+                <label for="important-info-description-input">Descrição:</label>
+                <textarea id="important-info-description-input" rows="4" cols="50" style="display: none;"></textarea>
                     <h3 class="system-title system-onvio">Onvio</h3>
                     <label for="onvio-status-input">Status:</label>
                     <select id="onvio-status-input">
