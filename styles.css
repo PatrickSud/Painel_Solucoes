@@ -21,6 +21,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
+    margin-bottom: 40px;
     gap: 40px;
 }
 
@@ -89,6 +90,14 @@ body {
     max-width: 600px;
     text-align: center;
     margin-top: 40px;
+}
+
+.info-section.hidden {
+    display: none;
+}
+
+.info-section.hidden + .menu {
+    margin-top: 40px; 
 }
 
 .info-section h2 {
