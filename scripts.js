@@ -4,6 +4,10 @@ function openModal() {
         document.getElementById(`${system.id}-datetime-input`).value = system.datetime;
         document.getElementById(`${system.id}-description-input`).value = system.description;
         document.getElementById(`${system.id}-status-input`).value = system.status;
+            // Esconde a caixa de texto e reseta o select ao abrir o modal
+        document.getElementById('important-info-description-input').style.display = 'none';
+        document.getElementById('important-info-input').value = 'no';
+        document.getElementById('update-modal').style.display = 'block';
     });
 
     document.getElementById('update-modal').style.display = 'block';
@@ -61,10 +65,19 @@ function updateStatus() {
         statusElement.className = 'status';
         statusElement.classList.add(`status-${system.status}`);
     });
+      const importantInfo = document.getElementById('important-info-input').value;
+      const infoSection = document.querySelector('.info-section');
+      if (importantInfo === 'yes') {
+          const importantInfoDescription = document.getElementById('important-info-description-input').value;
+          infoSection.querySelector('p').textContent = importantInfoDescription;
+          infoSection.classList.remove('hidden');
+      } else {
+          infoSection.classList.add('hidden');
+      }
 
-    saveStatusData(statusData);
-    closeModal();
-}
+      saveStatusData(statusData);
+      closeModal();
+  }
 
 function loadStatus() {
     const statusData = loadStatusData();
@@ -123,3 +136,16 @@ function loadStatusData() {
 function saveStatusData(statusData) {
     localStorage.setItem('statusData', JSON.stringify(statusData));
 }
+
+document.getElementById('important-info-input').addEventListener('change', function() {
+    const importantInfo = this.value;
+    const descriptionTextarea = document.getElementById('important-info-description-input');
+   const descriptionLabel = document.querySelector('label[for="important-info-description-input"]');
+    if (importantInfo === 'yes') {
+        descriptionTextarea.style.display = 'block';
+        descriptionLabel.style.display = 'block'; 
+    } else {
+        descriptionTextarea.style.display = 'none';
+        descriptionLabel.style.display = 'none';
+    }
+});
